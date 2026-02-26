@@ -1,3 +1,8 @@
+Equipe :
+Vincent Bouhnik
+Minh Le
+
+
 Domaine choisi:
 
 Nous avons choisi le domaine de la production cinématographique dans l’univers Marvel.
