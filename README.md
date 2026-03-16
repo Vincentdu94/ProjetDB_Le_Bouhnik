@@ -179,3 +179,122 @@ Le MCD a été réalisé avec le logiciel Looping.
 
 <img width="2048" height="1178" alt="image" src="https://github.com/user-attachments/assets/bb420369-5865-4616-b0f6-a60482dc06ff" />
 
+
+# Partie 3 – Modèle Logique et Physique de Données
+
+## Modèle Logique de Données (MLD)
+
+À partir du Modèle Conceptuel de Données (MCD) réalisé avec Looping, nous avons construit le **Modèle Logique de Données (MLD)** en transformant les entités et associations en relations.
+
+Le modèle relationnel obtenu est le suivant :
+
+CATEGORIE(#id_categorie, nom_categorie, description_categorie)
+
+FILM(#id_film, titre_film, resume_film, date_sortie_film, budget_film, duree_film, id_categorie)
+
+ACTEUR(#id_acteur, nom_acteur, prenom_acteur, date_naissance_acteur, nationalite_acteur, id_manager)
+
+INTERVIEW(#id_interview, titre_interview, date_interview, duree_interview, url_interview, id_film)
+
+EVENEMENT(#id_evenement, nom_evenement, date_evenement, lieu_evenement, capacite_lieu)
+
+EDITION_DVD(#id_edition, type_edition_dvd, prix_dvd, id_film)
+
+VENTE(#id_vente, date_vente, quantite_vendue, id_edition)
+
+JOUER(#id_film, #id_acteur, salaire_acteur_pour_film)
+
+PARTICIPER_INTERVIEW(#id_acteur, #id_interview)
+
+PARTICIPER_EVENEMENT(#id_acteur, #id_evenement, id_film)
+
+Les clés primaires sont les attributs précédés du symbole **#**.
+Les relations contenant plusieurs clés primaires correspondent aux associations N-N du MCD.
+
+À partir de ce modèle logique, nous avons ensuite créé le **modèle physique de données (MPD)** implémenté en SQL dans MySQL.
+
+Les scripts SQL sont fournis dans les fichiers :
+
+* `1_creation.sql` : création des tables
+* `2_contraintes.sql` : ajout des contraintes d’intégrité
+
+---
+
+# Partie 4 – Insertion des données
+
+Afin de remplir la base de données, nous avons utilisé un prompt inspiré du **TP1** afin de générer des requêtes d’insertion SQL cohérentes avec notre modèle relationnel.
+
+## Prompt utilisé
+
+Donne les requêtes d’insertion permettant de remplir la base de données dont le modèle relationnel est le suivant :
+
+CATEGORIE(#id_categorie, nom_categorie, description_categorie)
+
+FILM(#id_film, titre_film, resume_film, date_sortie_film, budget_film, duree_film, #id_categorie)
+
+ACTEUR(#id_acteur, nom_acteur, prenom_acteur, date_naissance_acteur, nationalite_acteur, #id_manager)
+
+INTERVIEW(#id_interview, titre_interview, date_interview, duree_interview, url_interview, #id_film)
+
+EVENEMENT(#id_evenement, nom_evenement, date_evenement, lieu_evenement, capacite_lieu)
+
+EDITION_DVD(#id_edition, type_edition_dvd, prix_dvd, #id_film)
+
+VENTE(#id_vente, date_vente, quantite_vendue, #id_edition)
+
+JOUER(#id_film,#id_acteur,salaire_acteur_pour_film)
+
+PARTICIPER_INTERVIEW(#id_acteur,#id_interview)
+
+PARTICIPER_EVENEMENT(#id_acteur,#id_evenement,#id_film)
+
+Les clés primaires correspondent aux identifiants (id).
+Les clés étrangères sont indiquées par le symbole **#**.
+
+Génère des données réalistes inspirées de l’univers Marvel en respectant les contraintes d’intégrité.
+Remplis les tables en commençant par celles ne contenant pas de clés étrangères, puis celles contenant des références.
+
+Retourne l’ensemble sous forme d’un **script SQL prêt à être exécuté**.
+
+Le script obtenu est fourni dans le fichier :
+
+`3_insertion.sql`
+
+Ce fichier contient les requêtes **INSERT** permettant d’ajouter plusieurs catégories, films Marvel, acteurs, éditions DVD et ventes.
+
+---
+
+# Partie 5 – Interrogation de la base de données
+
+## Scénario d’utilisation
+
+La base de données est utilisée par un **responsable marketing d’un studio de production inspiré de l’univers Marvel**.
+
+Son rôle est d’analyser les informations concernant les films produits par le studio afin de préparer les campagnes promotionnelles.
+
+Pour cela, il doit pouvoir consulter différentes informations telles que :
+
+* la liste des films produits et leurs caractéristiques (budget, date de sortie) ;
+* les acteurs ayant participé aux films ;
+* les catégories auxquelles appartiennent les films ;
+* les interviews et événements promotionnels associés aux films ;
+* les ventes des différentes éditions DVD.
+
+Ces informations permettent au responsable marketing d’évaluer le succès des films et d’identifier les productions les plus populaires.
+
+## Requêtes SQL
+
+Afin de répondre à ces besoins, plusieurs requêtes SQL ont été réalisées :
+
+* des requêtes de sélection et projection ;
+* des requêtes utilisant des **fonctions d’agrégation** ;
+* des requêtes utilisant des **jointures** ;
+* des **requêtes imbriquées**.
+
+Ces requêtes sont regroupées dans le fichier :
+
+`4_interrogation.sql`
+
+Chaque requête est commentée afin d’expliquer les données recherchées.
+
+
