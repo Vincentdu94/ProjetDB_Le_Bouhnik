@@ -1,8 +1,8 @@
 USE codelard;
 
--- =========================
--- 1️⃣ PROJECTIONS / SELECTIONS
--- =========================
+
+ PROJECTIONS / SELECTIONS
+
 
 -- 1. Liste des films sortis après 2015
 SELECT titre_film, date_sortie_film
@@ -29,9 +29,9 @@ SELECT titre_film
 FROM film
 WHERE id_categorie IN (1,2);
 
--- =========================
--- 2️⃣ FONCTIONS D’AGREGATION
--- =========================
+
+ FONCTIONS D’AGREGATION
+
 
 -- 6. Nombre total de films
 SELECT COUNT(*) AS nombre_films
@@ -55,9 +55,9 @@ SELECT id_edition, SUM(quantite_vendue) AS total_ventes
 FROM vente
 GROUP BY id_edition;
 
--- =========================
--- 3️⃣ JOINTURES
--- =========================
+
+ JOINTURES
+
 
 -- 11. Films avec leur catégorie
 SELECT titre_film, nom_categorie
@@ -89,9 +89,9 @@ FROM evenement
 JOIN participer_evenement ON evenement.id_evenement = participer_evenement.id_evenement
 JOIN film ON participer_evenement.id_film = film.id_film;
 
--- =========================
--- 4️⃣ REQUETES IMBRIQUEES
--- =========================
+
+ REQUETES IMBRIQUEES
+
 
 -- 16. Film avec le budget le plus élevé
 SELECT titre_film
